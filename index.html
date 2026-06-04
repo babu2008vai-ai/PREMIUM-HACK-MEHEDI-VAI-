@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HM Earn BD</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-    const SUPABASE_URL = "https://dmvkwenjlsbkbyvgbxil.supabase.co";
-</script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // 🔗 আপনার সুপ্রাবেস প্রজেক্ট লিংক এখানে সেট করা হলো
+        const SUPABASE_URL = "https://dmvkwenjlsbkbyvgbxil.supabase.co";
+        
+        // 🔑 আপনার সুপ্রাবেস থেকে আনা Anon Key-টি নিচের কোটেশনের ভেতরে বসিয়ে দিন
+        const SUPABASE_KEY = "এখানে_আপনার_সুপ্রাবেস_anon_key_বসাবেন";
+        
+        // 🚀 সুপ্রাবেস ক্লায়েন্ট তৈরি
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    </script>
 
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -404,7 +413,7 @@
 
         <div class="task-card">
             <div class="task-info">
-                <p>এই লিংকে একাউন্ট খুলুন এবং ৫ টাকা আয় করুন অবশ্যই স্ক্রিনশট জমা দিতে হবে</p>
+                <p>এই লিংকে একাউนต์ খুলুন এবং ৫ টাকা আয় করুন অবশ্যই স্ক্রিনশট জমা দিতে হবে</p>
                 <span>+৳৫.০০</span>
             </div>
             <button id="task3-btn" onclick="runLinkTask('https://playtok.win/app_bd.html?userId=7593775&currency=BDT&from=earncash', 'task3-btn', 5.00)" class="task-btn">Open Link</button>
@@ -517,7 +526,7 @@
             <div class="refer-warning-box">
                 <span>⚠️</span>
                 <div class="refer-warning-text">
-                    <b>ফেক রেফার করা থেকে বিরত থাকুন</b>, অন্যথায় আপনার উইড্র অপশন ক্যানসেল হয়ে যাবে।
+                    <b>ফেক রেফার করা থেকে বিরত থাকুন</b>, অন্যথায় আপনার উইড্র অপশন ক্যানсел হয়ে যাবে।
                 </div>
             </div>
 
@@ -538,7 +547,7 @@
 
     <div id="withdraw-modal" class="popup-modal">
         <div class="popup-content">
-            <span class="close-popup" onclick="closeModal('withdraw-modal')">&times;</span>
+            <span class="close-popup" onclick="closePopup('withdraw-modal')">&times;</span>
             <h4 style="color: #ef4444; margin-bottom: 6px; font-size: 16px;">Withdraw Request</h4>
             <p style="font-size: 12px; color: #f59e0b; margin-bottom: 12px; font-weight: bold; text-align: center;">
                 ⚠️ সর্বনিম্ন উত্তোলন: ৳১০০ | সর্বোচ্চ উত্তোলন: ৳১০,০০০
