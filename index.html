@@ -13,16 +13,16 @@ body{
     font-family:Arial;
     background: radial-gradient(circle at top,#001219,#000,#000814);
     color:white;
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
-/* MATRIX STYLE BACKGROUND */
+/* MATRIX SCAN EFFECT */
 body::before{
     content:"";
     position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    background:linear-gradient(0deg,transparent,rgba(0,255,170,0.05),transparent);
+    width:100%;
+    height:100%;
+    background:linear-gradient(180deg,transparent,rgba(0,255,200,0.05),transparent);
     animation:scan 3s linear infinite;
     pointer-events:none;
 }
@@ -43,18 +43,18 @@ body::before{
 }
 
 #mainTitle{
-    font-size:30px;
+    font-size:32px;
     font-weight:900;
+    text-align:center;
     text-transform:uppercase;
     background:linear-gradient(90deg,#00f5d4,#00bbf9,#fee440,#f15bb5,#00f5d4);
     background-size:400% 400%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:glowMove 3s linear infinite;
-    text-align:center;
+    animation:glow 3s linear infinite;
 }
 
-@keyframes glowMove{
+@keyframes glow{
     0%{background-position:0% 50%}
     100%{background-position:100% 50%}
 }
@@ -66,7 +66,6 @@ input{
     border:none;
     border-radius:12px;
     text-align:center;
-    outline:none;
 }
 
 button{
@@ -83,8 +82,8 @@ button{
 
 /* MESSAGE */
 #message{
-    text-align:center;
     font-weight:bold;
+    text-align:center;
     animation:blink 1s infinite alternate;
 }
 
@@ -102,29 +101,39 @@ button{
 
 /* DEV TITLE BIG */
 #devText{
-    font-size:22px;
+    font-size:26px;
     font-weight:900;
     margin-top:10px;
 
-    background:linear-gradient(90deg,#00f5d4,#00bbf9,#fee440,#f15bb5,#00f5d4);
-    background-size:400% 400%;
+    background:linear-gradient(90deg,#00f5d4,#fee440,#f15bb5,#00bbf9,#00f5d4);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    animation:glow 2s linear infinite;
+}
 
-    animation:glowMove 2s linear infinite;
+/* TIMER TOP LABEL */
+#devTopLabel{
+    font-size:18px;
+    font-weight:900;
+    margin-top:20px;
+
+    background:linear-gradient(90deg,#00f5d4,#00bbf9,#fee440,#f15bb5);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:glow 3s linear infinite;
 }
 
 /* RESULT */
 #result{
-    font-size:130px;
+    font-size:140px;
     font-weight:900;
-    margin-top:20px;
+    margin-top:10px;
 
     background:linear-gradient(90deg,#00f5d4,#fee440,#f15bb5,#00bbf9,#00f5d4);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 
-    animation:shake 0.8s infinite alternate, glowMove 3s linear infinite;
+    animation:shake 0.8s infinite alternate, glow 3s linear infinite;
 }
 
 @keyframes shake{
@@ -134,48 +143,49 @@ button{
 
 /* TIMER */
 #timer{
-    font-size:60px;
-    color:#fee440;
+    font-size:65px;
     font-weight:900;
+    color:#fee440;
 }
 
-/* LIVE TEXT */
+/* LIVE */
 #liveText{
-    font-size:16px;
+    font-size:18px;
+    font-weight:bold;
     color:#00f5d4;
-    letter-spacing:3px;
+    letter-spacing:2px;
+}
+
+/* LIFETIME */
+#lifetime{
+    margin-top:10px;
+    font-size:14px;
+    color:#00bbf9;
 }
 
 /* CONTACT */
 #contactBox{
     margin-top:60px;
-    padding:15px;
+    padding:18px;
     border:1px solid #00f5d4;
     border-radius:12px;
     display:flex;
     align-items:center;
     justify-content:center;
     gap:10px;
-    cursor:pointer;
     font-weight:bold;
     color:#00f5d4;
+    cursor:pointer;
     transition:0.3s;
 }
 
 #contactBox:hover{
     transform:scale(1.08);
-    box-shadow:0 0 25px #00f5d4;
+    box-shadow:0 0 30px #00f5d4;
 }
 
 #contactBox img{
-    width:22px;
-}
-
-/* FOOTER REMOVED BUTTONS AREA FIX */
-.footerText{
-    margin-top:40px;
-    color:#aaa;
-    font-size:12px;
+    width:24px;
 }
 </style>
 </head>
@@ -198,8 +208,11 @@ button{
 <!-- APP -->
 <div id="app">
 
-    <!-- BIG DEV TITLE WITH ICONS -->
+    <!-- BIG DEV LINE -->
     <div id="devText">🔥 MEHEDI VAI AI SYSTEM DEVELOPER 🔥</div>
+
+    <!-- TIMER TOP LABEL -->
+    <div id="devTopLabel">💎 SYSTEM RUNNING LIVE 💎</div>
 
     <div id="result">---</div>
 
@@ -207,10 +220,11 @@ button{
 
     <div id="liveText">⚡ REAL TIME LIVE ⚡</div>
 
+    <div id="lifetime">💎 LIFETIME ACTIVE SYSTEM 💎</div>
+
     <!-- CONTACT -->
     <div id="contactBox" onclick="openTelegram()">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-        CONTACT WITH ADMIN
+        📡 CONTACT WITH ADMIN
     </div>
 
 </div>
@@ -240,7 +254,7 @@ function login(){
     }else{
 
         msg.style.color="#ff4d6d";
-        msg.innerText="❌ Wrong Password! Please get password from Mehedi Vai";
+        msg.innerText="❌ Wrong Password! Please contact Mehedi Vai for access";
     }
 }
 
@@ -276,4 +290,4 @@ function openTelegram(){
 </script>
 
 </body>
-  </html>
+</html>
