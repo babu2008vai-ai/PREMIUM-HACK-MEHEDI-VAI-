@@ -3,266 +3,324 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEHEDI VAI AI SYSTEM</title>
+<title>RAJ RTB AI SYSTEM PRO</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
     margin:0;
     font-family:Arial;
-    background:url('https://cloudinary-marketing-res.cloudinary.com/image/upload/ar_0.5,c_fill,g_auto,w_433/q_auto/f_auto/hiking_dog_mountain.jpg') center/cover no-repeat;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* BOX */
-.box{
-    width:350px;
-    background:rgba(0,0,0,0.85);
-    padding:20px;
-    border-radius:15px;
     color:white;
-    text-align:center;
+    overflow:hidden;
+
+    background-image: url("https://i.postimg.cc/m29d9Z6t/IMG-20260610-145538-764.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-/* ANIMATED TITLE */
-.title{
-    font-size:18px;
-    font-weight:bold;
-    background:linear-gradient(90deg,#00ff88,#2196f3,#ff9800,#e91e63);
-    -webkit-background-clip:text;
-    color:transparent;
-    animation:move 3s infinite linear;
+/* overlay */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index:-1;
 }
 
-@keyframes move{
-    0%{filter:hue-rotate(0deg);}
-    100%{filter:hue-rotate(360deg);}
+.flash{
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    background:red;
+    opacity:0;
+    pointer-events:none;
 }
 
 /* LOGIN */
-input{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
+#loginBox{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+/* TITLE */
+#title{
+    font-size:28px;
+    font-weight:900;
+    text-align:center;
+    background:linear-gradient(90deg,#00f5d4,#fee440,#f15bb5,#00bbf9,#00f5d4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* APP TITLE (NEW ANIMATION) */
+#appTitle{
+    font-size:18px;
+    font-weight:900;
+    text-align:center;
+    margin-bottom:10px;
+
+    background:linear-gradient(90deg,#00ff99,#00bbf9,#ffcc00,#ff006e);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:popTitle 1.5s infinite alternate;
+}
+
+@keyframes popTitle{
+    0%{transform:translateY(-5px);opacity:0.6}
+    50%{transform:translateY(0px);opacity:1}
+    100%{transform:translateY(5px);opacity:0.6}
+}
+
+/* INPUT */
+input,button{
+    width:80%;
+    max-width:320px;
+    padding:15px;
     border:none;
-    border-radius:6px;
+    border-radius:10px;
+    text-align:center;
 }
 
 button{
-    padding:10px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.login-btn{
-    width:100%;
-    margin-top:10px;
-    background:#00c853;
+    background:#0077b6;
     color:white;
-}
-
-#error{color:red;margin-top:5px}
-
-/* DASHBOARD */
-#dashboard{display:none}
-
-/* BIG SMALL */
-.bs{
-    font-size:28px;
     font-weight:bold;
-    margin-top:10px;
 }
-.big{color:#00ff88;}
-.small{color:#ff5252;}
 
-/* NUMBER */
-.num{
-    font-size:22px;
-    margin-top:8px;
+/* APP */
+#app{
+    display:none;
+    text-align:center;
+    padding:20px;
+}
+
+#devText{
+    font-size:18px;
+    font-weight:900;
+    animation:glow 2s infinite;
+}
+
+@keyframes glow{
+    0%{opacity:1}
+    50%{opacity:0.4}
+    100%{opacity:1}
+}
+
+#result{
+    font-size:45px;
+    font-weight:900;
+    margin-top:20px;
+}
+
+#nums{
+    font-size:30px;
+    margin-top:10px;
+    color:#00ff99;
+}
+
+#timer{
+    font-size:55px;
+    color:#ffd60a;
+    font-weight:900;
+}
+
+#logs{
+    margin-top:20px;
+    height:120px;
+    border:1px solid #00ff99;
     padding:10px;
-    border:1px solid #00ff88;
-    border-radius:10px;
+    font-size:12px;
+    color:#00ff99;
 }
 
-/* TIMER */
-.timer{
-    margin-top:8px;
-    color:yellow;
-}
-
-/* HISTORY */
-.history{
-    margin-top:10px;
-    max-height:120px;
-    overflow:auto;
-    background:#111;
-    padding:8px;
-    border-radius:8px;
-    font-size:13px;
-}
-.win{color:#00ff88;}
-.jackpot{color:#ff9800;}
-
-/* FLOAT BUTTONS (ALWAYS FIXED) */
-.float-left,.float-right{
+/* ===== FLOAT BUTTONS (NEW PREMIUM STYLE) ===== */
+.floatBtn{
     position:fixed;
     bottom:20px;
-    padding:10px;
-    border-radius:10px;
+    padding:12px 14px;
+    border-radius:12px;
     cursor:pointer;
-    color:white;
-    font-size:13px;
-    z-index:999;
-    display:none;
+    font-weight:bold;
+    font-size:12px;
+    z-index:9999;
+    animation:pulse 1.5s infinite;
+    backdrop-filter:blur(10px);
 }
 
-.float-left{left:20px;background:#9c27b0;}
-.float-right{right:20px;background:#2196f3;}
-
-/* AI PANEL */
-.ai{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:300px;
-    background:#000;
-    border:1px solid #00ff88;
-    padding:15px;
-    display:none;
-    color:white;
-    z-index:1000;
-    animation:pop .3s ease;
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.08)}
+    100%{transform:scale(1)}
 }
 
-@keyframes pop{
-    from{transform:translate(-50%,-50%) scale(.6);opacity:0}
-    to{transform:translate(-50%,-50%) scale(1);opacity:1}
+#aiBtn{
+    left:20px;
+    background:linear-gradient(90deg,#9c27b0,#6a0dad);
 }
 
-.close{
-    width:100%;
-    background:red;
-    color:white;
-    margin-top:10px;
+#webBtn{
+    right:20px;
+    background:linear-gradient(90deg,#2196f3,#00c6ff);
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="flash" id="flash"></div>
 
 <!-- LOGIN -->
-<div id="loginPage">
-    <div class="title">MEHEDI VAI AI SYSTEM</div>
+<div id="loginBox">
 
-    <input type="password" id="password" placeholder="Enter Password">
+    <div id="title">RAJ RTB AI SYSTEM</div>
 
-    <button class="login-btn" onclick="login()">LOGIN</button>
+    <input id="password" type="password" placeholder="Enter Password">
 
-    <div id="error"></div>
-</div>
+    <button onclick="login()">LOGIN</button>
 
-<!-- DASHBOARD -->
-<div id="dashboard">
-
-    <div class="timer">
-        TIMER: <span id="time">30</span>s
-    </div>
-
-    <div class="bs" id="bs">BIG</div>
-
-    <div class="num" id="num">0</div>
-
-    <div class="history" id="history"></div>
+    <div id="msg"></div>
 
 </div>
 
+<!-- APP -->
+<div id="app">
+
+    <!-- NEW ANIMATED TITLE -->
+    <div id="appTitle">MEHEDI VAI AI SYSTEM</div>
+
+    <div id="devText">RAJ RTB AI SYSTEM ACTIVE</div>
+
+    <div id="result">---</div>
+    <div id="nums"></div>
+
+    <div id="timer">30</div>
+
+    <div id="logs"></div>
+
 </div>
 
-<!-- FLOAT BUTTONS -->
-<div class="float-left" id="aiBtn" onclick="openAI()">AI BUTTON</div>
-<div class="float-right" id="webBtn" onclick="openSite()">WEBSITE</div>
+<!-- FLOAT BUTTONS (ONLY AFTER LOGIN) -->
+<div id="aiBtn" class="floatBtn" onclick="alert('AI SYSTEM OPENED')">
+AI PANEL
+</div>
 
-<!-- AI PANEL -->
-<div class="ai" id="aiPanel">
-    <h3 style="color:#00ff88;">AI SYSTEM PANEL</h3>
-    <p>Running System Active...</p>
-    <button class="close" onclick="closeAI()">CLOSE</button>
+<div id="webBtn" class="floatBtn" onclick="openSite()">
+WEBSITE
 </div>
 
 <script>
 
-let time=30;
-let history=document.getElementById("history");
+const PASSWORD="rdraj001";
+
+let countdown=30;
+let started=false;
+let lastType="";
+
+/* hide buttons initially */
+document.getElementById("aiBtn").style.display="none";
+document.getElementById("webBtn").style.display="none";
 
 /* LOGIN */
 function login(){
-    let pass=document.getElementById("password").value;
 
-    if(pass==="mehedi11"){
-        document.getElementById("loginPage").style.display="none";
-        document.getElementById("dashboard").style.display="block";
+    let pass=document.getElementById("password").value;
+    let msg=document.getElementById("msg");
+
+    if(pass===PASSWORD){
+
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("app").style.display="block";
 
         document.getElementById("aiBtn").style.display="block";
         document.getElementById("webBtn").style.display="block";
 
-        setInterval(timer,1000);
-    }else{
-        document.getElementById("error").innerText="Wrong Password!";
+        if(!started){
+            started=true;
+            startSystem();
+            startLogs();
+        }
+
+    } else {
+        msg.innerText="❌ Wrong Password!";
     }
 }
 
-/* WEBSITE */
+/* OPEN WEBSITE */
 function openSite(){
     window.open('https://hgnice.bet/#/register?invitationCode=531211974484','_blank');
 }
 
-/* AI PANEL */
-function openAI(){
-    document.getElementById("aiPanel").style.display="block";
-}
-function closeAI(){
-    document.getElementById("aiPanel").style.display="none";
-}
+/* SYSTEM */
+function startSystem(){
 
-/* TIMER */
-function timer(){
-    time--;
+    update();
 
-    if(time<=0){
-        time=30;
-        update();
-    }
+    setInterval(()=>{
 
-    document.getElementById("time").innerText=time;
+        countdown--;
+        document.getElementById("timer").innerText=countdown;
+
+        if(countdown<=0){
+            countdown=30;
+            update();
+        }
+
+    },1000);
 }
 
-/* UPDATE SYSTEM */
+/* RANDOM */
+function getType(){
+    return Math.random()<0.5?"BIG":"SMALL";
+}
+
 function update(){
 
-    let num=Math.floor(Math.random()*10);
-    let bs=num>=5?"BIG":"SMALL";
+    let type=getType();
 
-    document.getElementById("num").innerText=num;
-    document.getElementById("bs").innerText=bs;
+    if(type===lastType){
+        type = type==="BIG"?"SMALL":"BIG";
+    }
 
-    document.getElementById("bs").className="bs "+(bs==="BIG"?"big":"small");
+    lastType=type;
 
-    let result=Math.random()>0.5?"WIN":"JACKPOT";
+    let nums = [Math.floor(Math.random()*10),
+                Math.floor(Math.random()*10),
+                Math.floor(Math.random()*10)];
 
-    let div=document.createElement("div");
-    div.innerText=result;
-    div.className=result==="WIN"?"win":"jackpot";
+    document.getElementById("result").innerText=type;
+    document.getElementById("nums").innerText=nums.join(" ");
 
-    history.prepend(div);
+}
+
+/* LOGS */
+function startLogs(){
+
+    const logs=[
+    "mehedi ai system...",
+    "system running...",
+    "ai engine online...",
+    "processing data..."
+    ];
+
+    setInterval(()=>{
+
+        document.getElementById("logs").innerText=
+        logs[Math.floor(Math.random()*logs.length)];
+
+    },900);
 }
 
 </script>
 
 </body>
-</html>
+                          </html>
