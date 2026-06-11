@@ -18,7 +18,7 @@ body{
 
 /* MAIN BOX */
 .box{
-    width:350px;
+    width:340px;
     background:rgba(0,0,0,0.85);
     padding:20px;
     border-radius:15px;
@@ -43,7 +43,6 @@ button{
     cursor:pointer;
 }
 
-/* LOGIN BTN */
 .login-btn{
     width:100%;
     margin-top:10px;
@@ -91,7 +90,7 @@ button{
     font-size:13px;
 }
 
-/* FLOAT BUTTONS */
+/* FLOAT BUTTONS (always visible after login) */
 .float-right, .float-left{
     position:fixed;
     bottom:20px;
@@ -100,6 +99,8 @@ button{
     cursor:pointer;
     color:white;
     font-size:13px;
+    display:none;
+    z-index:999;
 }
 
 .float-right{
@@ -117,7 +118,7 @@ button{
     position:fixed;
     top:50%;
     left:50%;
-    transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%) scale(0.8);
     width:320px;
     background:rgba(0,0,0,0.95);
     border:1px solid #00ff88;
@@ -125,15 +126,20 @@ button{
     padding:15px;
     display:none;
     color:white;
-    z-index:999;
+    z-index:1000;
+    animation:pop 0.3s ease;
 }
 
-/* CLOSE BTN */
+@keyframes pop{
+    from{transform:translate(-50%,-50%) scale(0.6);opacity:0}
+    to{transform:translate(-50%,-50%) scale(1);opacity:1}
+}
+
 .close{
     background:red;
     color:white;
-    margin-top:10px;
     width:100%;
+    margin-top:10px;
 }
 </style>
 </head>
@@ -142,6 +148,7 @@ button{
 
 <div class="box">
 
+<!-- LOGIN -->
 <div id="loginPage">
     <h2 style="color:#00ff88;">MEHEDI VAI AI SYSTEM</h2>
 
@@ -152,6 +159,7 @@ button{
     <div id="error"></div>
 </div>
 
+<!-- DASHBOARD -->
 <div id="dashboard">
 
     <div class="timer">
@@ -168,31 +176,30 @@ button{
 
 </div>
 
-<!-- FLOAT BUTTONS -->
-<div class="float-left" onclick="openAI()">
+<!-- FLOAT BUTTONS (hidden until login) -->
+<div class="float-left" id="aiBtn" onclick="openAI()">
 AI PANEL
 </div>
 
-<div class="float-right" onclick="openSite()">
+<div class="float-right" id="webBtn" onclick="openSite()">
 OPEN WEBSITE
 </div>
 
 <!-- AI PANEL -->
 <div class="ai-panel" id="aiPanel">
     <h3 style="color:#00ff88;">AI SYSTEM PANEL</h3>
-    <p>STATUS: RUNNING</p>
-    <p>BIG/SMALL ENGINE ACTIVE</p>
-    <p>RANDOM CORE: ONLINE</p>
-
+    <p>STATUS: ACTIVE</p>
+    <p>BIG/SMALL ENGINE RUNNING</p>
+    <p>RANDOM CORE ONLINE</p>
     <button class="close" onclick="closeAI()">CLOSE</button>
 </div>
 
 <script>
 
-let time = 30;
-let locked = true;
+let time=30;
+let locked=true;
 
-let history = document.getElementById("history");
+let history=document.getElementById("history");
 
 /* LOGIN */
 function login(){
@@ -201,6 +208,10 @@ function login(){
     if(pass==="mehedi11"){
         document.getElementById("loginPage").style.display="none";
         document.getElementById("dashboard").style.display="block";
+
+        document.getElementById("aiBtn").style.display="block";
+        document.getElementById("webBtn").style.display="block";
+
         start();
     }else{
         document.getElementById("error").innerText="Wrong Password!";
@@ -216,18 +227,18 @@ function openSite(){
 function openAI(){
     document.getElementById("aiPanel").style.display="block";
 }
-
 function closeAI(){
     document.getElementById("aiPanel").style.display="none";
 }
 
-/* SYSTEM START */
+/* START SYSTEM */
 function start(){
     setInterval(timer,1000);
 }
 
 /* TIMER */
 function timer(){
+
     time--;
 
     if(time<=0){
@@ -245,12 +256,10 @@ function update(){
     let num=Math.floor(Math.random()*10);
     let bs=num>=5?"BIG":"SMALL";
 
+    document.getElementById("num").innerText=num;
+
     let bsEl=document.getElementById("bs");
-    let numEl=document.getElementById("num");
-
     bsEl.innerText=bs;
-    numEl.innerText=num;
-
     bsEl.className="bs "+(bs==="BIG"?"big":"small");
 
     let result=Math.random()>0.5?"WIN":"JACKPOT";
