@@ -2,43 +2,61 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Club</title>
+<title>Game Club Pro</title>
+
 <style>
-body { font-family: Arial; background:#0f172a; color:white; text-align:center; }
-.box { margin:20px; padding:20px; background:#1e293b; border-radius:10px; }
-input, button { padding:10px; margin:5px; border:none; border-radius:5px; }
-button { background:#22c55e; color:white; }
-.game-btn { display:block; margin:5px; padding:10px; background:#334155; }
-.win { color:lime; }
-.lose { color:red; }
+body{margin:0;font-family:sans-serif;background:#0f172a;color:#fff}
+.top{background:#111827;padding:10px;text-align:center}
+.balance{color:#22c55e;font-weight:bold}
+.container{padding:10px}
+.box{background:#1e293b;padding:15px;border-radius:10px;margin-top:10px}
+button{padding:10px;border:none;border-radius:5px;margin:5px}
+.big{background:#f59e0b}
+.small{background:#3b82f6}
+.red{background:red}
+.green{background:green}
+.num{display:inline-block;width:30px;height:30px;line-height:30px;margin:3px;background:#334155;border-radius:5px}
+.win{color:lime}
+.lose{color:red}
 </style>
 </head>
 
 <body>
 
-<div id="auth">
+<div id="auth" class="container">
 <h2>Login / Register</h2>
-<input id="user" placeholder="Username"><br>
-<input id="pass" placeholder="Password" type="password"><br>
+<input id="user" placeholder="Username"><br><br>
+<input id="pass" type="password" placeholder="Password"><br><br>
 <button onclick="register()">Register</button>
 <button onclick="login()">Login</button>
 </div>
 
 <div id="app" style="display:none;">
-<h2>Balance: <span id="bal"></span></h2>
+<div class="top">
+Balance: <span id="bal" class="balance"></span> | Time: <span id="timer"></span>
+</div>
+
+<div class="container">
 
 <div class="box">
 <h3>🎮 Wingo Game</h3>
-<p>Time: <span id="time">30</span>s</p>
 
-<input id="bet" placeholder="Bet amount"><br>
+<input id="bet" placeholder="Bet Amount"><br>
 
-<button onclick="play('big')">Big</button>
-<button onclick="play('small')">Small</button><br>
-<button onclick="play('red')">Red</button>
-<button onclick="play('green')">Green</button>
+<button class="big" onclick="placeBet('big')">Big</button>
+<button class="small" onclick="placeBet('small')">Small</button><br>
+
+<button class="red" onclick="placeBet('red')">Red</button>
+<button class="green" onclick="placeBet('green')">Green</button>
+
+<div id="numbers"></div>
 
 <h3 id="result"></h3>
+</div>
+
+<div class="box">
+<h3>📜 History</h3>
+<div id="history"></div>
 </div>
 
 <div class="box">
@@ -47,83 +65,96 @@ button { background:#22c55e; color:white; }
 </div>
 
 </div>
+</div>
 
 <script>
-let balance = 1000;
-let currentUser = null;
-
-function saveUser(user, pass){
- localStorage.setItem(user, JSON.stringify({pass, balance:1000}));
-}
+let balance=1000,currentUser=null,currentBet=null,time=30,historyList=[];
 
 function register(){
- let u = user.value;
- let p = pass.value;
- if(!u || !p) return alert("Fill all");
- saveUser(u,p);
- alert("Registered!");
+ let u=user.value,p=pass.value;
+ if(!u||!p)return alert("Fill all");
+ localStorage.setItem(u,JSON.stringify({pass:p,balance:1000}));
+ alert("Registered");
 }
 
 function login(){
- let u = user.value;
- let p = pass.value;
- let data = JSON.parse(localStorage.getItem(u));
- if(!data || data.pass !== p) return alert("Wrong!");
- currentUser = u;
- balance = data.balance;
+ let u=user.value,p=pass.value;
+ let d=JSON.parse(localStorage.getItem(u));
+ if(!d||d.pass!==p)return alert("Wrong");
+ currentUser=u;
+ balance=d.balance;
  auth.style.display="none";
  app.style.display="block";
  updateBal();
 }
 
 function updateBal(){
- bal.innerText = balance;
- localStorage.setItem(currentUser, JSON.stringify({pass:pass.value, balance}));
+ bal.innerText=balance;
+ localStorage.setItem(currentUser,JSON.stringify({pass:pass.value,balance}));
 }
 
-function randomResult(){
- let num = Math.floor(Math.random()*10);
+function placeBet(type){
+ let amt=parseInt(bet.value);
+ if(!amt||amt>balance)return alert("Invalid");
+ currentBet={type,amt};
+ alert("Bet placed: "+type);
+}
+
+function genResult(){
+ let num=Math.floor(Math.random()*10);
  return {
   num,
-  size: num>=5 ? 'big':'small',
-  color: num%2==0 ? 'red':'green'
+  size:num>=5?'big':'small',
+  color:num%2==0?'red':'green'
  };
 }
 
-function play(type){
- let betAmt = parseInt(bet.value);
- if(betAmt>balance) return alert("Low balance");
- let r = randomResult();
+function runGame(){
+ if(!currentBet)return;
 
- balance -= betAmt;
+ let r=genResult();
+ let win=(currentBet.type===r.size||currentBet.type===r.color);
 
- let win = (type===r.size || type===r.color);
+ balance-=currentBet.amt;
 
  if(win){
-  balance += betAmt*2;
-  result.innerHTML = `WIN 🎉 Number:${r.num}`; 
+  balance+=currentBet.amt*2;
+  result.innerHTML="WIN 🎉 Number: "+r.num;
   result.className="win";
  }else{
-  result.innerHTML = `LOSE ❌ Number:${r.num}`;
+  result.innerHTML="LOSE ❌ Number: "+r.num;
   result.className="lose";
  }
 
+ historyList.unshift("Num:"+r.num+" | "+(win?"Win":"Lose"));
+ history.innerHTML=historyList.slice(0,10).join("<br>");
+
+ currentBet=null;
  updateBal();
 }
 
-let t=30;
 setInterval(()=>{
- t--;
- if(t<=0) t=30;
- time.innerText=t;
+ time--;
+ if(time<=0){
+  runGame();
+  time=30;
+ }
+ timer.innerText=time;
 },1000);
 
-// fake 50 games
+// numbers UI
+for(let i=0;i<10;i++){
+ let n=document.createElement("div");
+ n.className="num";
+ n.innerText=i;
+ numbers.appendChild(n);
+}
+
+// fake games
 for(let i=1;i<=50;i++){
- let btn=document.createElement("div");
- btn.className="game-btn";
- btn.innerText="Game "+i+" (Coming Soon)";
- games.appendChild(btn);
+ let g=document.createElement("div");
+ g.innerText="Game "+i+" (Coming Soon)";
+ games.appendChild(g);
 }
 </script>
 
