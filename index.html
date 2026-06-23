@@ -7,10 +7,10 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow:hidden;height:100vh;}
+body{font-family:'Share Tech Mono',monospace;background:transparent;color:#0f0;overflow:hidden;height:100vh;}
 
 /* MATRIX BG */
-#matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.13;}
+#matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0;}
 
 /* LOGIN */
 #loginBox{
@@ -57,13 +57,13 @@ body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow
 #gameFrame{position:fixed;top:0;left:0;width:100%;height:100vh;border:none;z-index:1;}
 
 /* OVERLAY PANEL — top portion */
-#panel{position:fixed;top:0;left:0;width:100%;z-index:10;padding:0;}
+#panel{position:fixed;top:0;left:0;width:100%;z-index:10;padding:5px 8px 6px;background:transparent;}
 #panel:active{cursor:grabbing;}
 
 /* TOP BAR */
 .topbar{
   display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid #0a0;padding-bottom:5px;margin-bottom:6px;
+  border-bottom:1px solid #0a0;padding-bottom:5px;margin-bottom:6px;background:transparent;
 }
 .topbar-title{font-family:'Orbitron',sans-serif;font-size:11px;color:#0f0;letter-spacing:2px;}
 .blink{animation:blink .8s infinite;}
@@ -75,7 +75,7 @@ body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow
 }
 .sig-card{
   border:1px solid #0a0;padding:6px 4px;text-align:center;
-  background:rgba(0,255,0,.03);border-radius:2px;position:relative;overflow:hidden;
+  background:rgba(0,0,0,.72);border-radius:2px;position:relative;overflow:hidden;
 }
 .sig-card::before{
   content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
@@ -96,7 +96,7 @@ body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow
   display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:6px;
 }
 .az-card{
-  border:1px solid #030;padding:5px 4px;background:rgba(0,255,0,.02);
+  border:1px solid #030;padding:5px 4px;background:rgba(0,0,0,.72);
   border-radius:2px;font-size:9px;
 }
 .az-title{color:#060;margin-bottom:3px;letter-spacing:1px;}
@@ -135,7 +135,7 @@ body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow
 
 /* SCORE + BTN ROW */
 .score-row{display:flex;justify-content:space-between;align-items:center;font-size:9px;}
-.score-vals{color:#0a0;letter-spacing:1px;}
+.score-vals{color:#0a0;letter-spacing:1px;text-shadow:0 0 6px #0a0;}
 .sm-btn{
   padding:3px 10px;border:1px solid #0a0;background:transparent;
   color:#0a0;cursor:pointer;font-family:'Share Tech Mono',monospace;
@@ -210,7 +210,7 @@ body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow
 <div id="app">
   <iframe id="gameFrame" src="https://hgnice.bet/#/register?invitationCode=523331718632"></iframe>
 
-  <div id="panel"><div id="panel-inner" style="background:rgba(0,0,0,0.91);border-bottom:2px solid #0a0;padding:5px 8px 7px;box-shadow:0 4px 24px rgba(0,255,0,0.18);">
+  <div id="panel">
     <!-- TOP BAR -->
     <div class="topbar">
       <div class="topbar-title" id="analyzerName">⬡ DEEP MARKET ANALYZER</div>
@@ -292,7 +292,7 @@ body{font-family:'Share Tech Mono',monospace;background:#000;color:#0f0;overflow
     </div>
   </div><!-- /panel -->
 
-  </div></div><div id="analyzing">[ DEEP ANALYSIS IN PROGRESS... ]</div>
+  <div id="analyzing">[ DEEP ANALYSIS IN PROGRESS... ]</div>
   <div id="resultPopup"></div>
   <img id="photoPop" src="https://i.ibb.co/GfyDbfQ4/1781766483671.png" alt="">
 
