@@ -13,6 +13,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
+    <!-- [AD NETWORK 1]: Social Bar / In-App Scripts -->
+    <script src="https://pl30110711.effectivecpmnetwork.com/28/57/36/28573663e0aeef140c29ae45a9d4bf12.js"></script>
+    <script src="https://pl30110713.effectivecpmnetwork.com/d0/d3/61/d0d361ebef6d096f13c06f332c9a3829.js"></script>
+
     <style>
         :root {
             --bg-dark: #090a0f;
@@ -225,6 +229,16 @@
         .btn-approve { background: var(--success); color: #000; font-weight: 700; border: none; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; }
         .btn-reject { background: var(--danger); color: #fff; font-weight: 700; border: none; padding: 10px; border-radius: 10px; cursor: pointer; flex: 1; }
 
+        /* Banner Container Custom Style */
+        .ad-banner-placement {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px auto;
+            width: 100%;
+            overflow: hidden;
+        }
+
         /* Animations Keyframes */
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -250,6 +264,20 @@
         <div class="app-header">
             <div class="brand-title">HM EARN BD <i class="fa-solid fa-gem" style="color:var(--gold); font-size:14px; margin-left:2px;"></i></div>
             <div onclick="openSheet('sheet-profile')" style="cursor:pointer;"><i class="fa-regular fa-user-circle" style="font-size: 26px; color: var(--text-main);"></i></div>
+        </div>
+
+        <!-- [AD NETWORK 2]: Native Banner Placement 468x60 -->
+        <div class="ad-banner-placement">
+            <script>
+              atOptions = {
+                'key' : 'd204cdd511360aa9f71e123718ee1bcb',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highperformanceformat.com/d204cdd511360aa9f71e123718ee1bcb/invoke.js"></script>
         </div>
 
         <!-- Glowing Live Wallet Card -->
@@ -291,6 +319,12 @@
                 <h3>Affiliate Share</h3>
                 <p>Earn Unlimited Commission</p>
             </div>
+        </div>
+
+        <!-- [AD NETWORK 3]: Asynchronous Multi-Format Widget Box -->
+        <div class="ad-banner-placement">
+            <script async="async" data-cfasync="false" src="https://pl30110714.effectivecpmnetwork.com/8c734ad6c388d22c4c5bcee5d93c9907/invoke.js"></script>
+            <div id="container-8c734ad6c388d22c4c5bcee5d93c9907"></div>
         </div>
     </div>
 
@@ -514,8 +548,8 @@
                 return;
             }
 
-            // আপনার Adsterra ডিরেক্ট লিংকটি নিচে বসিয়ে দিন
-            let adsterraDirectLinkUrl = "https://www.highrateprofit.com/your-adsterra-id"; 
+            // [AD NETWORK - DIRECT LINK]: আপনার দেওয়া ১ নম্বর ডিরেক্ট লিংকটি নিচে সেট করা হয়েছে
+            let adsterraDirectLinkUrl = "https://www.effectivecpmnetwork.com/ntbaqzdb?key=7681ef7a1b425010f4571a422a7f2f75"; 
             window.open(adsterraDirectLinkUrl, "_blank");
 
             let nextWatchedCount = localUserRecordMemoryState.todayWatched + 1;
